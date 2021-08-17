@@ -2,6 +2,7 @@ const fs = require('fs');
 const data = fs.readFileSync('./database.json');
 const conf = JSON.parse(data); 
 const mysql = require('mysql'); 
+const moment = require('moment');
 
 const connection = mysql.createConnection({
   host: conf.host,
