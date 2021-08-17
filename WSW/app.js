@@ -8,8 +8,9 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 const user = require('./routes/user/index');
 const review = require('./routes/reveiw/index');
-
-//모델
+const random = require('./routes/random/index');
+const question = require('./routes/question/index');
+const secret = require('./routes/secret/index');
 
 var app = express();
 
@@ -27,6 +28,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter)
 app.use('/user', user);
 app.use('/review', review);
+app.use('/random', random);
+app.use('/question', question);
+app.use('/secret', secret);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
