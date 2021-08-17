@@ -4,8 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//라우팅
 var indexRouter = require('./routes/index');
 const user = require('./routes/user/index');
+const review = require('./routes/reveiw/index');
+
+//모델
 
 var app = express();
 
@@ -19,8 +23,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//라우팅
 app.use('/', indexRouter)
 app.use('/user', user);
+app.use('/review', review);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
