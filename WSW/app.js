@@ -11,6 +11,7 @@ const review = require('./routes/reveiw/index');
 const random = require('./routes/random/index');
 const question = require('./routes/question/index');
 const secret = require('./routes/secret/index');
+const study = require('./routes/study/index');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use('/review', review);
 app.use('/random', random);
 app.use('/question', question);
 app.use('/secret', secret);
+app.use('/study', study);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

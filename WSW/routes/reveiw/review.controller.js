@@ -34,7 +34,7 @@ exports.review = (req, res) => {
 exports.write = (req,res) => {
   console.log('review_write');
 
-  const user_id = req.body.user_id
+  const user_id = req.body.user_id;
   const review_content = req.body.review_content;
   const review_date = req.body.review_date;
   const review_like = req.body.review_like;
@@ -61,6 +61,22 @@ exports.write = (req,res) => {
 //후기 삭제하기
 exports.delete = (req,res) => {
   console.log('review_delete');
+  
+  const review_id = req.query.review_id;
 
+  let sql = 'delete from review where review_id=?'
+
+  connection.query(sql, review_id,
+    (err, rows, fiedls) => {
+      console.log(err);
+      if(err){
+        console.log('review delete err')
+        res.send(rows)
+      }else{
+        console.log('review delete success')
+        res.send(rows)
+      }
+    }  
+  )
 
 }
