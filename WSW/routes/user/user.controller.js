@@ -21,8 +21,8 @@ connection.connect();
 /* 로그인 */
 
 /* 회원가입 */
-exports.register = (req, res) =>{
-  console.log('register')
+exports.signup = (req, res) =>{
+  console.log('signup')
 
   const user_name = req.body.user_name;
   const user_email = req.body.user_email;
@@ -38,13 +38,17 @@ exports.register = (req, res) =>{
     (err, rows, fields) => {
       console.log(err);
       if(err){  // 회원가입 실패
-        console.log('register err')
+        console.log('signup err')
         res.send(rows)
 
       }else{    // 회원가입 성공
-        console.log('register success')
+        console.log('signup success')
         res.send(rows)
       }
     }
   )
+}
+
+exports.scrap = (req, res) =>{
+  
 }
