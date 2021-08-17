@@ -18,31 +18,49 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
-/* 후기 불러오기 */
+/* 후기 목록*/
 exports.review = (req, res) => {
-    console.log('review')
-
-    const review_id = req.body.review_id;
-    const user_id = req.body.user_id;
-    const review_content = req.body.review_content;
-    const review_date = req.body.review_date;
-    const review_like = req.body.review_like;
-    const review_CMount = req.body.review_CMount;
-
-    let params = [review_id, user_id, review_content, review_date, review_like, review_CMount]
-    let sql = 'INSERT INTO review(review_id, user_id, review_content, review_date, review_like, review_CMount) VALUES (?, ?, ?, ?, ?);';
-
-    connection.query(sql,params,
-      (err, rows, fields) =>{
-        console.log(err);
-        if(err){ //후기 등록 실패
-            console.log('review err')
-            res.send(rows)
-        }
-        else{ //후기 등록 성공
-          console.log('review success')
-          res.send(rows)
-        }
+    console.log('review_list');
+    
+    let sql = 'SELECT * FROM review;'
+    connection.query(sql,
+      (err,rows,fiedls)=>{
+        res.send(rows)
       }
     )
+}
+
+// 후기 글쓰기
+exports.write = (req,res) => {
+  console.log('review_write');
+
+  const user_id = req.body.user_id
+  const review_content = req.body.review_content;
+  const review_date = req.body.review_date;
+  const review_like = req.body.review_like;
+  const review_CMcount = req.body.review_CMcount;
+
+  let params = [user_id, review_content, review_date, review_like, review_CMcount]
+  let sql = 'INSERT INTO review(user_id, review_content, review_date, review_like, review_CMcount) VALUES(?,?,?,?,?)'
+
+  connection.query(sql, params,
+    (err, rows, fiedls) => {
+      console.log(err);
+      if(err){
+        console.log('review write err')
+        res.send(rows)
+      }
+      else{
+        console.log('review write success')
+        res.send(rows)
+      }
+    }  
+  )
+}
+
+//후기 삭제하기
+exports.delete = (req,res) => {
+  console.log('review_delete');
+
+
 }
