@@ -3,6 +3,6 @@ const router = express.Router();
 const controller = require('./message.controller');
 
 //message list
-router.get('/list', controller.register)
+router.get('/list', controller.list)
 
 module.exports = router;
