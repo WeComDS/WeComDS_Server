@@ -41,7 +41,7 @@ exports.get = (req, res) =>{
 
 // 스케줄러
 // 일정시간마다 랜덤하게 메세지 하나 가져와서 변수 randomMsg에 저장.
-schedule.scheduleJob('*/5 * * * * *', function(){ // cron 표현식: 테스트를 위해 5초마다 실행
+schedule.scheduleJob('5 * * * * *', function(){ // cron 표현식: 테스트를 위해 5초마다 실행
   var tmp = randomMsg
 
   connection.query(
@@ -54,7 +54,6 @@ schedule.scheduleJob('*/5 * * * * *', function(){ // cron 표현식: 테스트�
       if (tmp !== row1){
         randomMsg = row1
       }else{
-        console.log("khhh")
         randomMsg = row2
       }
       console.log(randomMsg)
