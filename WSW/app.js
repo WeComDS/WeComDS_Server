@@ -4,11 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//라우팅
 var indexRouter = require('./routes/index');
 const user = require('./routes/user/index');
+const review = require('./routes/reveiw/index');
 const random = require('./routes/random/index');
 const question = require('./routes/question/index');
 const secret = require('./routes/secret/index');
+const study = require('./routes/study/index');
 
 var app = express();
 
@@ -22,11 +25,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//라우팅
 app.use('/', indexRouter)
 app.use('/user', user);
+app.use('/review', review);
 app.use('/random', random);
 app.use('/question', question);
 app.use('/secret', secret);
+app.use('/study', study);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
