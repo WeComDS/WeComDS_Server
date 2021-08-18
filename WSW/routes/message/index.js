@@ -1,10 +1,11 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router()
 const controller = require('./message.controller');
 
 //message receive list
-router.get('/message', controller.register)
+router.post('/get', controller.get)
 //message send list
-router.get('/message_sent', controller.register)
+router.post('/send', controller.send)
+//write message
+router.post('/write', controller.write);
 
 module.exports = router;
