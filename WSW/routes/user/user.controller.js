@@ -22,13 +22,13 @@ connection.connect();
 
 /* 회원가입 */
 exports.signup = (req, res) =>{
-  console.log('signup')
+  console.log('signup');
 
   const user_name = req.body.user_name;
   const user_email = req.body.user_email;
   const user_pw = req.body.user_pw;
   const user_check = req.body.user_check;
-
+  console.log(user_name);
   let params = [user_name, user_email, user_pw, user_check];
   let sql = 'INSERT INTO user(user_name, user_email, user_pw, user_check) VALUES (?, ?, ?, ?);';
 
@@ -38,11 +38,11 @@ exports.signup = (req, res) =>{
       console.log(err);
       if(err){  // 회원가입 실패
         console.log('signup err')
-        res.send(rows)
+        res.send(Boolean(false))
 
       }else{    // 회원가입 성공
         console.log('signup success')
-        res.send(rows)
+        res.send(Boolean(true))
       }
     }
   )
