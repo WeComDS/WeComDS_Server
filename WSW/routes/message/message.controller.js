@@ -18,34 +18,38 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
-/* 받은 쪽지함 */
-exports.get= (req, res) =>{
-  console.log('message get');
+//유저와 주고 받은 상대방 찾기
+exports.readAll = (req, res) => {
+  console.log('message read all');
 
+  const user_id = req.body.user_id;
+  const mes_sendID = req.body.mes_sendID;
   const mes_receiveID = req.body.mes_receiveID;
+  const mes_content = req.body.mes_content;
   
-  let sql = 'SELECT mes_receiveID FROM message;';
+  //const v = [user_id, user_id];
+  let params = [user_id, mes_sendID, mes_receiveID, mes_content]
+  let sql = 'SELECT DISTINCT mes_sendID, mes_receiveID, mes_content FROM message WHERE user_id = 1 ORDER BY mes_date DESC LIMIT 1;'
 
-  connection.query(sql, mes_receiveID,
-
+  connection.query(sql, params,
     (err, rows, fields) => {
       res.send(rows)
-    }
-  )
+    })
 }
 
-/* 보낸 쪽지함 */
-exports.send= (req, res) =>{
-  console.log('message send');
+
+/* 받은 쪽지함(쪽지읽기) */
+exports.get= (req, res) =>{
+  console.log('message list');
 
   const mes_sendID = req.body.mes_sendID;
-  //const mes_receiveID = req.body.mes_receiveID;
-  //const mes_content = req.body.mes_content;
-  //const mes_date = req.body.mes_date;
+  const mes_receiveID = req.body.mes_receiveID;
+  const mes_content = req.body.mes_content;
+  const mes_date = req.body.mes_date;
   
-  let sql = 'SELECT mes_sendID FROM message;'
-
-  connection.query(sql, mes_sendID,
+  const params = [mes_sendID, mes_content, mes_date];
+  let sql = 'SELECT mes_sendID, mes_content, mes_date FROM message ORDER BY mes_date ASC;'
+  connection.query(sql, params,
 
     (err, rows, fields) => {
       res.send(rows)
@@ -54,16 +58,17 @@ exports.send= (req, res) =>{
 }
 
 //write message
-exports.write = (req,res) => {
+exports.write = (req, res) => {
   console.log('message_write');
 
+  const user_id = req.body.user_id;
   const mes_sendID = req.body.mes_sendID;
   const mes_receiveID = req.body.mes_receiveID;
   const mes_content = req.body.mes_content;
   const mes_date = req.body.mes_date;
 
-  let params = [mes_sendID, mes_receiveID, mes_content, mes_date]
-  let sql = 'INSERT INTO message(mes_sendID, mes_receiveID, mes_content, mes_date) VALUES(?,?,?,?)'
+  let params = [user_id, mes_sendID, mes_receiveID, mes_content, mes_date]
+  let sql = 'INSERT INTO message (user_id, mes_sendID, mes_receiveID, mes_content, mes_date) VALUES(?,?,?,?,?);'
 
   connection.query(sql, params,
     (err, rows, fiedls) => {
