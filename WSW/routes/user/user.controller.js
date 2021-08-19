@@ -30,7 +30,7 @@ exports.signup = (req, res) =>{
   const user_check = req.body.user_check;
   console.log(user_name);
   let params = [user_name, user_email, user_pw, user_check];
-  let sql = 'INSERT INTO user(user_name, user_email, user_pw, user_check) VALUES (?, ?, ?, ?);';
+  let sql = 'INSERT INTO user(user_name, user_email, user_pw, user_check, count) VALUES (?, ?, ?, ?, 0);';
 
   connection.query(sql, params,
 
