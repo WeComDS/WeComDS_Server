@@ -38,12 +38,11 @@ exports.review_comment = (req, res) => {
   const user_id = req.body.user_id;
   const review_id = req.body.review_id;
   const review_comm_content = req.body.review_comm_content;
-  //const review_comm_date = req.body.review_comm_date;태영이한테 물어봐야 자동인지 아닌지 
 
   
   let params = [user_id, review_id, review_comm_content]
   let sql = 'INSERT INTO review_comment(user_id, review_id, review_comm_id, review_comm_content,review_comm_date, review_comm_like) VALUES(?,?,?,?,?,?)'
-  //insert 
+  
   connection.query(sql, params,
     (err, rows, fiedls) => {
       console.log(err);
@@ -63,12 +62,13 @@ exports.review_comment = (req, res) => {
   exports.delete = (req,res) => {
   console.log('review_comm_delete');
   
-  const review_id = req.query.review_id;
+  const review_comm_id = req.query.review_comm_id;
   
   let sql = 'delete from review_comment where review_comment_id=?'
   
   connection.query(sql, review_id,
-    (err, rows, fiedls) => {
+    (err, rows, fiedls) => { 
+      
       console.log(err);
       if(err){
         console.log('review_comm delete err')
