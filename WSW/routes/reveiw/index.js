@@ -9,4 +9,5 @@ router.post('/write', controller.write);
 //후기게시판 글 삭제
 router.delete('/:id', controller.delete);
 
+
 module.exports = router;
