@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //라우팅
 var indexRouter = require('./routes/index');
 const user = require('./routes/user/index');
-const review = require('./routes/reveiw/index');
+const review = require('./routes/review/index');
 const random = require('./routes/random/index');
 const question = require('./routes/question/index');
 const secret = require('./routes/secret/index');

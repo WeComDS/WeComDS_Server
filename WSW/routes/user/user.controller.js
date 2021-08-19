@@ -19,6 +19,33 @@ const connection = mysql.createConnection({
 connection.connect();
 
 /* 로그인 */
+exports.login = (req, res) => {
+  const user_email = req.body.user_email;
+  const user_pw = req.body.user_pw;
+
+  
+  connection.query(
+    'SELECT * FROM user WHERE user_email LIKE \''+user_email+'\';',
+    (err, rows, fields) =>{
+      if(err){
+        console.log(err)
+      }
+      if('\"' +user_pw+ '\"' === JSON.stringify(rows[0].user_pw)){
+        
+        userId = rows[0].user_id
+        userName = rows[0].user_name
+        userEmail = rows[0].user_email
+        
+        let sendData = {userId, userName, userEmail}
+
+        res.send(sendData)
+      }else{
+        res.send("false")
+      }
+    }
+    
+  )
+}
 
 /* 회원가입 */
 exports.signup = (req, res) =>{
