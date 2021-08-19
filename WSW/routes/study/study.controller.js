@@ -46,21 +46,22 @@ exports.write = (req,res) => {
 
   let params = [user_id, study_title, study_date, study_style, study_headcount, study_introduce, study_notice, study_state, study_applycount]
   let sql = 'INSERT INTO study(user_id, study_title, study_date, study_style, study_headcount, study_introduce, study_notice, study_state, study_applycount) VALUES(?,?,?,?,?,?,?,?,?)'
-
+  console.log(params)
   connection.query(sql, params,
     (err, rows, fiedls) => {
       console.log(err);
       if(err){
         console.log('study write err')
-        res.send(rows)
+        res.send(Boolean(false))
       }
       else{
         console.log('study write success')
-        res.send(rows)
+        res.send(Boolean(true))
       }
     }  
   )
 }
+
 
 //스터디 삭제하기
 exports.delete = (req,res) => {
